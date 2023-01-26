@@ -30,7 +30,7 @@ For Canada:
 
 - Linux 64-bit Python 3.8.7
 - Ubuntu 20.04.05 LTS
-- Melissa data files for 2022-12
+- Melissa data files for 2023-01
 
 ## Required File(s) and Programs
 
