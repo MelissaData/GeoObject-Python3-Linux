@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Name:    MelissaDataGeoCoderObjectLinuxPython3
-# Purpose: Use the Melissa Updater to make the MelissaDataGeoCoderObjectLinuxPython3 sample usable
+# Name:    MelissaGeoCoderObjectLinuxPython3
+# Purpose: Use the Melissa Updater to make the MelissaGeoCoderObjectLinuxPython3 code usable
 
 ######################### Constants ##########################
 
@@ -48,7 +48,7 @@ ProductName="GEOCODER_DATA"
 # Uses the location of the .sh file 
 # Modify this if you want to use 
 CurrentPath=$(pwd)
-ProjectPath="$CurrentPath/MelissaDataGeoCoderObjectLinuxPython3Sample"
+ProjectPath="$CurrentPath/MelissaGeoCoderObjectLinuxPython3"
 BuildPath="$ProjectPath"
 DataPath="$ProjectPath/Data"
 if [ ! -d $DataPath ];
@@ -122,7 +122,7 @@ CheckSOs()
 }
 
 ########################## Main ############################
-printf "\n================= Sample of Melissa Data GeoCoder Object ================\n                    [ Python3 | Linux | 64BIT ]\n"
+printf "\n======================== Melissa GeoCoder Object ========================\n                    [ Python3 | Linux | 64BIT ]\n"
 
 # Get license (either from parameters or user input)
 if [ -z "$license" ];
@@ -175,14 +175,11 @@ fi
 
 printf "\nAll file(s) have been downloaded/updated!\n"
 
-# Start sample
-# Build project
-printf "\n============================= BUILD PROJECT =============================\n"
-
+# Start
 # Run project
 if [ -z "$zip" ];
 then
-    python3 $BuildPath/MelissaDataGeoCoderObjectLinuxPython3Sample.py --license $license  --dataPath $DataPath
+    python3 $BuildPath/MelissaGeoCoderObjectLinuxPython3.py --license $license  --dataPath $DataPath
 else
-    python3 $BuildPath/MelissaDataGeoCoderObjectLinuxPython3Sample.py --license $license  --dataPath $DataPath --zip "$zip"
+    python3 $BuildPath/MelissaGeoCoderObjectLinuxPython3.py --license $license  --dataPath $DataPath --zip "$zip"
 fi

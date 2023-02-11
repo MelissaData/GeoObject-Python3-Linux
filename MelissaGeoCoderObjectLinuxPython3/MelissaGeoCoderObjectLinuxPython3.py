@@ -33,7 +33,7 @@ class GeoObject:
         print(f"              Expiration Date: {self.md_geo_obj.GetLicenseExpirationDate()}")
       
         """
-        This number should match with file properties of the Melissa Data Object binary file.
+        This number should match with file properties of the Melissa Object binary file.
         If TEST appears with the build number, there may be a license key issue.
         """
         print(f"               Object Version: {self.md_geo_obj.GetBuildNumber()}\n")
@@ -45,8 +45,8 @@ class GeoObject:
         result_codes = self.md_geo_obj.GetResults()
 
         """ 
-        ResultsCodes explain any issues geo object has with the object.
-        List of result codes for GeoCoder object
+        ResultsCodes explain any issues GeoCoder Object has with the object.
+        List of result codes for GeoCoder Object
         https://wiki.melissadata.com/?title=Result_Code_Details#GeoCoder_Object
         """
 
@@ -74,7 +74,7 @@ def parse_arguments():
     return (license, test_zip, data_path)
 
 def run_as_console(license, test_zip, data_path):
-    print("\n\n===== WELCOME TO MELISSA DATA GEOCODER OBJECT LINUX PYTHON3 SAMPLE ======\n")
+    print("\n\n=========== WELCOME TO MELISSA GEOCODER OBJECT LINUX PYTHON3 ===========\n")
 
     geo_object = GeoObject(license, data_path)
 
@@ -138,7 +138,7 @@ def run_as_console(license, test_zip, data_path):
             
               print("Invalid Response, please respond 'Y' or 'N'")
 
-    print("\n============ THANK YOU FOR USING MELISSA DATA PYTHON3 OBJECT ============\n")
+    print("\n============== THANK YOU FOR USING MELISSA PYTHON3 OBJECT ===============\n")
     
 
 
