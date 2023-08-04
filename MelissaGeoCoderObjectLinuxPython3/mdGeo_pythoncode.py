@@ -2,13 +2,14 @@ from ctypes import *
 from enum import Enum
 import ctypes
 import os
+import sys
 
-dir = os.getcwd()
-
-if (os.name == 'nt'):
-  lib = ctypes.CDLL(f'{dir}/MelissaGeoCoderObjectWindowsPython3/mdGeo.dll')
+if (os.name == 'nt' and sys.version_info[:2] >= (3,8)):
+  lib = ctypes.CDLL('mdGeo.dll', winmode=0)
+elif (os.name == 'nt'):
+  lib = ctypes.CDLL('mdGeo.dll')
 else:
-  lib = ctypes.CDLL(f'{dir}/MelissaGeoCoderObjectLinuxPython3/libmdGeo.so')
+  lib = ctypes.CDLL('libmdGeo.so')
 
 lib.mdGeoCreate.argtypes = []
 lib.mdGeoCreate.restype = c_void_p

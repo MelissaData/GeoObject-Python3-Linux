@@ -42,7 +42,7 @@ while [ $# -gt 0 ] ; do
 done
 
 # ######################### Config ###########################
-RELEASE_VERSION='2023.06'
+RELEASE_VERSION='2023.07'
 ProductName="GEOCODER_DATA"
 
 # Uses the location of the .sh file 
@@ -68,6 +68,13 @@ Config_OS="LINUX"
 Config_Compiler="GCC48"
 Config_Architecture="64BIT"
 Config_Type="BINARY"
+
+Wrapper_FileName="mdGeo_pythoncode.py"
+Wrapper_ReleaseVersion=$RELEASE_VERSION
+Wrapper_OS="ANY"
+Wrapper_Compiler="PYTHON"
+Wrapper_Architecture="ANY"
+Wrapper_Type="INTERFACE"
 
 # ######################## Functions #########################
 DownloadDataFiles()
@@ -109,6 +116,31 @@ DownloadSO()
     fi
     
     printf "Melissa Updater finished downloading $Config_FileName!\n"
+}
+
+DownloadWrapper() 
+{
+    printf "\nMELISSA UPDATER IS DOWNLOADING WRAPPER(s)...\n"
+    
+    # Check for quiet mode
+    if [ $quiet == "true" ];
+    then
+        ./MelissaUpdater/MelissaUpdater file --filename $Wrapper_FileName --release_version $Wrapper_ReleaseVersion --license $1 --os $Wrapper_OS --compiler $Wrapper_Compiler --architecture $Wrapper_Architecture --type $Wrapper_Type --target_directory $ProjectPath &> /dev/null
+        if [ $? -ne 0 ];
+        then
+            printf "\nCannot run Melissa Updater. Please check your license string!\n"
+            exit 1
+        fi
+    else
+        ./MelissaUpdater/MelissaUpdater file --filename $Wrapper_FileName --release_version $Wrapper_ReleaseVersion --license $1 --os $Wrapper_OS --compiler $Wrapper_Compiler --architecture $Wrapper_Architecture --type $Wrapper_Type --target_directory $ProjectPath 
+        if [ $? -ne 0 ];
+        then
+            printf "\nCannot run Melissa Updater. Please check your license string!\n"
+            exit 1
+        fi
+    fi
+    
+    printf "Melissa Updater finished downloading $Wrapper_FileName!\n"
 }
 
 CheckSOs() 
@@ -159,6 +191,9 @@ DownloadDataFiles $license      # comment out this line if using DQS Release
 # Download SO(s)
 DownloadSO $license 
 
+# Download wrapper(s)
+DownloadWrapper $license
+
 # Check if all SO(s) have been downloaded. Exit script if missing
 printf "\nDouble checking SO file(s) were downloaded...\n"
 
@@ -179,7 +214,10 @@ printf "\nAll file(s) have been downloaded/updated!\n"
 # Run project
 if [ -z "$zip" ];
 then
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./MelissaGeoCoderObjectLinuxPython3
     python3 $BuildPath/MelissaGeoCoderObjectLinuxPython3.py --license $license  --dataPath $DataPath
 else
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./MelissaGeoCoderObjectLinuxPython3
     python3 $BuildPath/MelissaGeoCoderObjectLinuxPython3.py --license $license  --dataPath $DataPath --zip "$zip"
 fi
+

@@ -1,7 +1,6 @@
 # Melissa - GeoCoder Object Linux Python3
 
 ## Purpose
-
 This code showcases the Melissa GeoCoder Object using Python3
 
 Please feel free to copy or embed this code to your own project. Happy coding!
@@ -10,31 +9,29 @@ For the latest Melissa GeoCoder Object release notes, please visit: https://rele
 
 The console will ask the user for:
 
-- Zip Code
+- Zip
 
 And return 
 
 For US:
 
-- PlaceName
+- Place Name
 - County
-- CountySubdivisionName
-- TimeZone
+- County Subdivision Name
+- Time Zone
 - Latitude
 - Longitude
-- ResultCodes
+- Result Codes
 
 For Canada:
 
-- TimeZone
+- Time Zone
 - Latitude
 - Longitude
 
 ## Tested Environments
-
-- Linux 64-bit Python 3.8.7
-- Ubuntu 20.04.05 LTS
-- Melissa data files for 2023-06
+- Linux 64-bit Python 3.8.7, Ubuntu 20.04.05 LTS
+- Melissa data files for 2023-07
 
 ## Required File(s) and Programs
 
@@ -67,12 +64,11 @@ If you see the version number then you have installed Python3 and set up your en
 
 #### Download this project
 ```
-$ git clone https://github.com/MelissaData/GeoObject-Python3-Linux.git
+$ git clone https://github.com/MelissaData/GeoObject-Python3-Linux
 $ cd GeoObject-Python3-Linux
 ```
 
 #### Set up Melissa Updater
-
 Melissa Updater is a CLI application allowing the user to update their Melissa applications/data. 
 
 - In the root directory of the project, create a folder called `MelissaUpdater` by using the command: 
@@ -163,11 +159,9 @@ This is the expected output from a successful setup for interactive mode:
 
     
 ## Troubleshooting
-
 Troubleshooting for errors found while running your program.
 
 ### Errors:
-
 | Error      | Description |
 | ----------- | ----------- |
 | ErrorRequiredFileNotFound      | Program is missing a required file. Please check your Data folder and refer to the list of required files above. If you are unable to obtain all required files through the Melissa Updater, please contact technical support below. |
@@ -177,7 +171,6 @@ Troubleshooting for errors found while running your program.
 
 
 ## Contact Us
-
 For free technical support, please call us at 800-MELISSA ext. 4
 (800-635-4772 ext. 4) or email us at tech@melissa.com.
 

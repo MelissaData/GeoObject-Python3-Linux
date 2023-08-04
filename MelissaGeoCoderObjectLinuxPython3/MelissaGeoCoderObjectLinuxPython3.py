@@ -86,7 +86,7 @@ def run_as_console(license, test_zip, data_path):
     while should_continue_running:
         if test_zip == None or test_zip == "":        
           print("\nFill in each value to see the GeoCoder Object results")
-          zip_code = str(input("Zip Code: "))
+          zip_code = str(input("Zip: "))
         else:        
           zip_code = test_zip
         
@@ -94,7 +94,7 @@ def run_as_console(license, test_zip, data_path):
 
         """ Print user input """
         print("\n================================ INPUTS =================================\n")
-        print(f"\t               Zip Code: {zip_code}")
+        print(f"\t                    Zip: {zip_code}")
 
         """ Execute GeoCoder Object """
         data_container = geo_object.execute_object_and_result_codes(data)
@@ -102,13 +102,12 @@ def run_as_console(license, test_zip, data_path):
         """ Print output """
         print("\n================================ OUTPUT =================================\n")
         print("\n\tGeoCoder Object Information:")
-        print(f"\t              PlaceName: {geo_object.md_geo_obj.GetPlaceName()}")
+        print(f"\t             Place Name: {geo_object.md_geo_obj.GetPlaceName()}")
         print(f"\t                 County: {geo_object.md_geo_obj.GetCountyName()}")
-        print(f"\t  CountySubdivisionName: {geo_object.md_geo_obj.GetCountySubdivisionName()}")
-        print(f"\t               TimeZone: {geo_object.md_geo_obj.GetTimeZone()}")
+        print(f"\tCounty Subdivision Name: {geo_object.md_geo_obj.GetCountySubdivisionName()}")
+        print(f"\t              Time Zone: {geo_object.md_geo_obj.GetTimeZone()}")
         print(f"\t               Latitude: {geo_object.md_geo_obj.GetLatitude()}")
         print(f"\t              Longitude: {geo_object.md_geo_obj.GetLongitude()}")
-
         print(f"\t           Result Codes: {data_container.result_codes}")
 
 
