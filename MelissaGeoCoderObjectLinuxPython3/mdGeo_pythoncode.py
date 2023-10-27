@@ -220,7 +220,7 @@ class mdGeo(object):
 	def WriteToLogFile(self, logFile):
 		return lib.mdGeoWriteToLogFile(self.I, logFile.encode('utf-8'))
 
-	def GeoCode(self, Zip, Plus4):
+	def GeoCode(self, Zip, Plus4=""):
 		return lib.mdGeoGeoCode(self.I, Zip.encode('utf-8'), Plus4.encode('utf-8'))
 
 	def GeoPoint(self, Zip, Plus4, DeliveryPointCode):
@@ -241,7 +241,7 @@ class mdGeo(object):
 	def GetResults(self):
 		return lib.mdGeoGetResults(self.I).decode('utf-8')
 
-	def GetResultCodeDescription(self, resultCode, opt):
+	def GetResultCodeDescription(self, resultCode, opt=0):
 		return lib.mdGeoGetResultCodeDescription(self.I, resultCode.encode('utf-8'), ResultCdDescOpt(opt).value).decode('utf-8')
 
 	def GetLatitude(self):
