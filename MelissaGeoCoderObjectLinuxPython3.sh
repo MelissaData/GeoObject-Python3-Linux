@@ -11,30 +11,40 @@ NC='\033[0m' # No Color
 ######################### Parameters ##########################
 
 zip=""
+dataPath=""
 license=""
 quiet="false"
 
 while [ $# -gt 0 ] ; do
   case $1 in
-    -z | --zip) 
+    --zip) 
         zip="$2"
         
-        if [ "$zip" == "-l" ] || [ "$zip" == "--license" ] || [ "$zip" == "-q" ] || [ "$zip" == "--quiet" ] || [ -z "$zip" ];
+        if [ "$zip" == "--dataPath" ] || [ "$zip" == "--license" ] || [ "$zip" == "--quiet" ] || [ -z "$zip" ];
         then
             printf "${RED}Error: Missing an argument for parameter \'zip\'.${NC}\n"  
             exit 1
         fi 
         ;;
-    -l | --license) 
+    --dataPath) 
+        dataPath="$2"
+        
+        if [ "$dataPath" == "--license" ] || [ "$dataPath" == "--quiet" ] || [ "$dataPath" == "--zip" ] || [ -z "$dataPath" ];
+        then
+            printf "${RED}Error: Missing an argument for parameter \'dataPath\'.${NC}\n"  
+            exit 1
+        fi 
+        ;;
+    --license) 
         license="$2"
         
-        if [ "$license" == "-q" ] || [ "$license" == "--quiet" ] || [ "$license" == "-z" ] || [ "$license" == "--zip" ] || [ -z "$license" ];
+        if [ "$license" == "--quiet" ] || [ "$license" == "--zip" ] || [ "$license" == "--dataPath" ] || [ -z "$license" ];
         then
             printf "${RED}Error: Missing an argument for parameter \'license\'.${NC}\n"  
             exit 1
         fi  
         ;;
-    -q | --quiet) 
+    --quiet) 
         quiet="true" 
         ;;
   esac
@@ -42,23 +52,28 @@ while [ $# -gt 0 ] ; do
 done
 
 # ######################### Config ###########################
-RELEASE_VERSION='2024.01'
+RELEASE_VERSION='2024.Q2'
 ProductName="GEOCODER_DATA"
 
 # Uses the location of the .sh file 
-# Modify this if you want to use 
 CurrentPath=$(pwd)
 ProjectPath="$CurrentPath/MelissaGeoCoderObjectLinuxPython3"
-BuildPath="$ProjectPath"
-DataPath="$ProjectPath/Data"
-if [ ! -d $DataPath ];
+
+if [ -z "$dataPath" ];
 then
-    mkdir $DataPath
+    DataPath="$ProjectPath/Data"
+else
+    DataPath=$dataPath
 fi
 
-if [ ! -d $BuildPath ];
+if [ ! -d "$DataPath" ] && [ "$DataPath" == "$ProjectPath/Data" ];
 then
-    mkdir $BuildPath
+    mkdir "$DataPath"
+elif [ ! -d "$DataPath" ] && [ "$DataPath" != "$ProjectPath/Data" ];
+then
+    printf "\nData file path does not exist. Please check that your file path is correct.\n"
+    printf "\nAborting program, see above.\n"
+    exit 1
 fi
 
 # Config variables for download file(s)
@@ -100,14 +115,14 @@ DownloadSO()
     # Check for quiet mode
     if [ $quiet == "true" ];
     then
-        ./MelissaUpdater/MelissaUpdater file --filename $Config_FileName --release_version $Config_ReleaseVersion --license $1 --os $Config_OS --compiler $Config_Compiler --architecture $Config_Architecture --type $Config_Type --target_directory $BuildPath &> /dev/null
+        ./MelissaUpdater/MelissaUpdater file --filename $Config_FileName --release_version $Config_ReleaseVersion --license $1 --os $Config_OS --compiler $Config_Compiler --architecture $Config_Architecture --type $Config_Type --target_directory $ProjectPath &> /dev/null
         if [ $? -ne 0 ];
         then
             printf "\nCannot run Melissa Updater. Please check your license string!\n"
             exit 1
         fi
     else
-        ./MelissaUpdater/MelissaUpdater file --filename $Config_FileName --release_version $Config_ReleaseVersion --license $1 --os $Config_OS --compiler $Config_Compiler --architecture $Config_Architecture --type $Config_Type --target_directory $BuildPath 
+        ./MelissaUpdater/MelissaUpdater file --filename $Config_FileName --release_version $Config_ReleaseVersion --license $1 --os $Config_OS --compiler $Config_Compiler --architecture $Config_Architecture --type $Config_Type --target_directory $ProjectPath 
         if [ $? -ne 0 ];
         then
             printf "\nCannot run Melissa Updater. Please check your license string!\n"
@@ -145,7 +160,7 @@ DownloadWrapper()
 
 CheckSOs() 
 {
-    if [ ! -f $BuildPath/$Config_FileName ];
+    if [ ! -f $ProjectPath/$Config_FileName ];
     then
         echo "false"
     else
@@ -175,18 +190,25 @@ then
   exit 1
 fi
 
+# Get data file path (either from parameters or user input)
+if [ "$DataPath" = "$ProjectPath/Data" ]; then
+    printf "Please enter your data files path directory if you have already downloaded the release zip.\nOtherwise, the data files will be downloaded using the Melissa Updater (Enter to skip): "
+    read dataPathInput
+
+    if [ ! -z "$dataPathInput" ]; then  
+        if [ ! -d "$dataPathInput" ]; then  
+            printf "\nData file path does not exist. Please check that your file path is correct.\n"
+            printf "\nAborting program, see above.\n"
+            exit 1
+        else
+            DataPath=$dataPathInput
+        fi
+    fi
+fi
+
 # Use Melissa Updater to download data file(s) 
 # Download data file(s) 
-DownloadDataFiles $license      # comment out this line if using DQS Release
-
-# Set data file(s) path
-#DataPath=""      # uncomment this line and change to your DQS Release data file(s) directory 
-
-#if [ ! -d $DataPath ]; # uncomment this section of code if you are using your own DQS Release data file(s) directory
-#then
-    #printf "\nData path is invalid!\n"
-    #exit 1
-#fi
+DownloadDataFiles $license # Comment out this line if using own release
 
 # Download SO(s)
 DownloadSO $license 
@@ -215,9 +237,9 @@ printf "\nAll file(s) have been downloaded/updated!\n"
 if [ -z "$zip" ];
 then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./MelissaGeoCoderObjectLinuxPython3
-    python3 $BuildPath/MelissaGeoCoderObjectLinuxPython3.py --license $license  --dataPath $DataPath
+    python3 $ProjectPath/MelissaGeoCoderObjectLinuxPython3.py --license $license  --dataPath $DataPath
 else
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./MelissaGeoCoderObjectLinuxPython3
-    python3 $BuildPath/MelissaGeoCoderObjectLinuxPython3.py --license $license  --dataPath $DataPath --zip "$zip"
+    python3 $ProjectPath/MelissaGeoCoderObjectLinuxPython3.py --license $license  --dataPath $DataPath --zip "$zip"
 fi
 
