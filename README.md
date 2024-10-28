@@ -33,7 +33,7 @@ For Canada:
 
 ## Tested Environments
 - Linux 64-bit Python 3.8.7, Ubuntu 20.04.05 LTS
-- Melissa data files for 2024-Q3
+- Melissa data files for 2024-Q4
 
 ## Required File(s) and Programs
 
@@ -66,8 +66,8 @@ If you see the version number then you have installed Python3 and set up your en
 
 #### Download this project
 ```
-$ git clone https://github.com/MelissaData/GeoObject-Python3-Linux
-$ cd GeoObject-Python3-Linux
+git clone https://github.com/MelissaData/GeoObject-Python3-Linux
+cd GeoObject-Python3-Linux
 ```
 
 #### Set up Melissa Updater
@@ -137,26 +137,26 @@ When you have modified the script to match your data location, let's run the scr
 There are two modes:
 - Interactive
 
-	The script will prompt the user for a zip code, then use the provided zip to test GeoCoder Object. For example:
-	```
-	$ ./MelissaGeoCoderObjectLinuxPython3.sh
-	```
-	For quiet mode:
-	```
-	$ ./MelissaGeoCoderObjectLinuxPython3.sh --quiet
-	```
+  The script will prompt the user for a zip code, then use the provided zip to test GeoCoder Object. For example:
+  ```
+  ./MelissaGeoCoderObjectLinuxPython3.sh
+  ```
+  For quiet mode:
+  ```
+  ./MelissaGeoCoderObjectLinuxPython3.sh --quiet
+  ```
 - Command Line
 
-    You can pass a zip code in the ```--zip``` parameter and a license string in ```--license``` parameter to test GeoCoder Object. For example:
-    ```
-    $ ./MelissaGeoCoderObjectLinuxPython3.sh --zip "92688"
-    $ ./MelissaGeoCoderObjectLinuxPython3.sh --zip "92688" --license "<your_license_string>"
-    ```
-    For quiet mode:
-    ```
-    $ ./MelissaGeoCoderObjectLinuxPython3.sh --zip "92688" --quiet
-    $ ./MelissaGeoCoderObjectLinuxPython3.sh --zip "92688" --license "<your_license_string>" --quiet
-    ```
+  You can pass a zip code in the ```--zip``` parameter and a license string in ```--license``` parameter to test GeoCoder Object. For example:
+  ```
+  ./MelissaGeoCoderObjectLinuxPython3.sh --zip "92688"
+  ./MelissaGeoCoderObjectLinuxPython3.sh --zip "92688" --license "<your_license_string>"
+  ```
+  For quiet mode:
+  ```
+  ./MelissaGeoCoderObjectLinuxPython3.sh --zip "92688" --quiet
+  ./MelissaGeoCoderObjectLinuxPython3.sh --zip "92688" --license "<your_license_string>" --quiet
+  ```
 This is the expected output from a successful setup for interactive mode:
 
 ![alt text](/screenshots/output.png)
