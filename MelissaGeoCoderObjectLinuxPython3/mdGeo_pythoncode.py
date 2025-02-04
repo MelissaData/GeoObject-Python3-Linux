@@ -179,19 +179,19 @@ class mdGeo(object):
 		lib.mdGeoDestroy(self.I)
 
 	def SetPathToGeoCodeDataFiles(self, p1):
-		lib.mdGeoSetPathToGeoCodeDataFiles(self.I, p1.encode('1252'))
+		lib.mdGeoSetPathToGeoCodeDataFiles(self.I, (p1 or '').encode('1252'))
 
 	def SetPathToGeoPointDataFiles(self, p1):
-		lib.mdGeoSetPathToGeoPointDataFiles(self.I, p1.encode('1252'))
+		lib.mdGeoSetPathToGeoPointDataFiles(self.I, (p1 or '').encode('1252'))
 
 	def SetPathToGeoCanadaDataFiles(self, p1):
-		lib.mdGeoSetPathToGeoCanadaDataFiles(self.I, p1.encode('1252'))
+		lib.mdGeoSetPathToGeoCanadaDataFiles(self.I, (p1 or '').encode('1252'))
 
 	def SetLicenseString(self, License):
-		return lib.mdGeoSetLicenseString(self.I, License.encode('1252'))
+		return lib.mdGeoSetLicenseString(self.I, (License or '').encode('1252'))
 
 	def Initialize(self, DataPath, IndexPath):
-		return ProgramStatus(lib.mdGeoInitialize(self.I, DataPath.encode('1252'), IndexPath.encode('1252')))
+		return ProgramStatus(lib.mdGeoInitialize(self.I, (DataPath or '').encode('1252'), (IndexPath or '').encode('1252')))
 
 	def InitializeDataFiles(self):
 		return ProgramStatus(lib.mdGeoInitializeDataFiles(self.I))
@@ -212,19 +212,19 @@ class mdGeo(object):
 		return lib.mdGeoGetLicenseExpirationDate(self.I).decode('1252')
 
 	def SetLatitude(self, latitude):
-		lib.mdGeoSetLatitude(self.I, latitude.encode('1252'))
+		lib.mdGeoSetLatitude(self.I, (latitude or '').encode('1252'))
 
 	def SetLongitude(self, longitude):
-		lib.mdGeoSetLongitude(self.I, longitude.encode('1252'))
+		lib.mdGeoSetLongitude(self.I, (longitude or '').encode('1252'))
 
 	def WriteToLogFile(self, logFile):
-		return lib.mdGeoWriteToLogFile(self.I, logFile.encode('1252'))
+		return lib.mdGeoWriteToLogFile(self.I, (logFile or '').encode('1252'))
 
 	def GeoCode(self, Zip, Plus4=""):
-		return lib.mdGeoGeoCode(self.I, Zip.encode('1252'), Plus4.encode('1252'))
+		return lib.mdGeoGeoCode(self.I, (Zip or '').encode('1252'), (Plus4 or '').encode('1252'))
 
 	def GeoPoint(self, Zip, Plus4, DeliveryPointCode):
-		return lib.mdGeoGeoPoint(self.I, Zip.encode('1252'), Plus4.encode('1252'), DeliveryPointCode.encode('1252'))
+		return lib.mdGeoGeoPoint(self.I, (Zip or '').encode('1252'), (Plus4 or '').encode('1252'), (DeliveryPointCode or '').encode('1252'))
 
 	def ComputeDistance(self, Latitude1, Longitude1, Latitude2, Longitude2):
 		return lib.mdGeoComputeDistance(self.I)
@@ -242,7 +242,7 @@ class mdGeo(object):
 		return lib.mdGeoGetResults(self.I).decode('1252')
 
 	def GetResultCodeDescription(self, resultCode, opt=0):
-		return lib.mdGeoGetResultCodeDescription(self.I, resultCode.encode('1252'), ResultCdDescOpt(opt).value).decode('1252')
+		return lib.mdGeoGetResultCodeDescription(self.I, (resultCode or '').encode('1252'), ResultCdDescOpt(opt).value).decode('1252')
 
 	def GetLatitude(self):
 		return lib.mdGeoGetLatitude(self.I).decode('1252')
@@ -332,10 +332,10 @@ class mdGeo(object):
 		return lib.mdGeoGetBlockSuffix(self.I).decode('1252')
 
 	def SetInputParameter(self, key, val):
-		return lib.mdGeoSetInputParameter(self.I, key.encode('1252'), val.encode('1252'))
+		return lib.mdGeoSetInputParameter(self.I, (key or '').encode('1252'), (val or '').encode('1252'))
 
 	def FindGeo(self):
 		lib.mdGeoFindGeo(self.I)
 
 	def GetOutputParameter(self, key):
-		return lib.mdGeoGetOutputParameter(self.I, key.encode('1252')).decode('1252')
+		return lib.mdGeoGetOutputParameter(self.I, (key or '').encode('1252')).decode('1252')

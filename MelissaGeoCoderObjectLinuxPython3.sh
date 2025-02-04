@@ -52,7 +52,7 @@ while [ $# -gt 0 ] ; do
 done
 
 # ######################### Config ###########################
-RELEASE_VERSION='2024.Q4'
+RELEASE_VERSION='2025.Q1'
 ProductName="GEOCODER_DATA"
 
 # Uses the location of the .sh file 
