@@ -5,7 +5,7 @@ This code showcases the Melissa GeoCoder Object using Python3
 
 Please feel free to copy or embed this code to your own project. Happy coding!
 
-For the latest Melissa GeoCoder Object release notes, please visit: https://releasenotes.melissa.com/on-premise-api/geocoder-object/
+To view the latest Melissa GeoCoder Object release notes or to subscribe to product notifications, please visit: https://releasenotes.melissa.com/on-premise-api/geocoder-object/
 
 For further details, please visit: https://docs.melissa.com/on-premise-api/geocoder-object/geocoder-object-quickstart.html
 
@@ -33,7 +33,7 @@ For Canada:
 
 ## Tested Environments
 - Linux 64-bit Python 3.8.7, Ubuntu 20.04.05 LTS
-- Melissa data files for 2026-Q2
+- Melissa data files for 2026-Q3
 
 ## Required File(s) and Programs
 
